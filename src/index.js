@@ -19,7 +19,7 @@ app.get('/projects', (request, response) => {
   return response.status(200).json(results);
 });
 
-//curl -X POST http://localhost:3333/projects -d '{ "project": { "name": "Project 03 created" } }' -H "Content-Type: application/json;charset=utf-8"
+//curl -X POST http://localhost:3333/projects -d '{ "name": "Project created", "owner": "Nobody" }' -H "Content-Type: application/json;charset=utf-8"
 app.post('/projects', (request, response) => {
   const { name, owner } = request.body;
   const project = { id: uuid(), name, owner };
@@ -27,7 +27,7 @@ app.post('/projects', (request, response) => {
   return response.status(201).json(project);
 });
 
-//curl -X PUT http://localhost:3333/projects/1 -d '{ "project": { "name": "Project 02 updated" } }' -H "Content-Type: application/json;charset=utf-8"
+//curl -X PUT http://localhost:3333/projects/{id} -d '{ "name": "Project updated", "owner": "Somebody" }' -H "Content-Type: application/json;charset=utf-8"
 app.put('/projects/:id', (request, response) => {
   const { id } = request.params;
   const { name, owner } = request.body;
@@ -42,7 +42,7 @@ app.put('/projects/:id', (request, response) => {
   return response.status(204).json(project);
 })
 
-//curl -X DELETE http://localhost:3333/projects/1
+//curl -X DELETE http://localhost:3333/projects/{id}
 app.delete('/projects/:id', (request, response) => {
   const { id } = request.params;
 
